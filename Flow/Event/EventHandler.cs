@@ -11,6 +11,11 @@ namespace DESF.Flow.Event
     /// </summary>
     abstract public class EventHandler
     {
+        /// <summary>
+        /// Atempts to forward the passed event to appropriate
+        /// handler inside current class
+        /// </summary>
+        /// <param name="ev">The event</param>
         public void Notify(SEvent ev)
         {
             if (this.GetType().GetMethod("Handle" + ev.Name) != null)
