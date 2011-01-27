@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Flow\Calendar\Calendar.cs" />
+    <Compile Include="Flow\Calendar\Term.cs" />
     <Compile Include="Flow\Event\EventEmmitingProvider.cs" />
     <Compile Include="Flow\Event\EventHandler.cs" />
     <Compile Include="Flow\Event\SEvent.cs" />
@@ -48,7 +50,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Flow\Calendar\" />
     <Folder Include="Object\Agent\" />
     <Folder Include="Object\Proccessor\" />
     <Folder Include="Object\Queue\" />
