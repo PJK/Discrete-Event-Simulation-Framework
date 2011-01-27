@@ -49,10 +49,10 @@ namespace DESF.Flow.Event
         /// Triggers passed event at all registred handlers
         /// </summary>
         /// <param name="ev">The event</param>
-        public void FireEvent(SEvent ev)
+        public void FireEvent(SEvent ev, IEventEmmiter source)
         {
             foreach (IEventHandler handler in _handlers) {
-                handler.Notify(ev);
+                handler.Notify(ev,source);
             }
         }
     }

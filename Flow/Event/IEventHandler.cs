@@ -17,6 +17,7 @@ namespace DESF.Flow.Event
         /// about an event
         /// </summary>
         /// <param name="ev">The event</param>
-        void Notify(SEvent ev);
+        /// <param name="source">Reference event source</param>
+        void Notify(SEvent ev, IEventEmmiter source);
     }
 }
