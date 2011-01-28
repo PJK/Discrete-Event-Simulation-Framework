@@ -11,7 +11,7 @@ namespace DESF.Tools
     /// </summary>
     public class SimulationContext
     {
-        public Subject.Logger.ILogger Logger { set; get; }
-        public Flow.Calendar.Calendar Calendar { get; set; }
+        public virtual Subject.Logger.ILogger Logger { set; get; }
+        public virtual Flow.Calendar.Calendar Calendar { get; set; }
     }
 }

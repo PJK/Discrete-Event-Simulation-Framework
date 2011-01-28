@@ -22,6 +22,13 @@ namespace DESF.Flow.Calendar
             get
             { return _uniqueName; }
         }
+        public uint Time
+        {
+            get
+            {
+                return _time;
+            }
+        }
 
         public Calendar(Tools.SimulationContext context)
         {
@@ -87,7 +94,7 @@ namespace DESF.Flow.Calendar
         {
             _terms.Sort();
             uint otime = _terms[0].Time;
-            while (_terms[0].Time == otime)
+            while ((_terms.Count > 0) && (_terms[0].Time == otime))
             {
                 Term tcache = _terms[0];
                 _terms.RemoveAt(0);
