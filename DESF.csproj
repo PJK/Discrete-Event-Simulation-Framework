@@ -48,13 +48,16 @@
     <Compile Include="Flow\Event\IEventEmmiter.cs" />
     <Compile Include="Flow\Event\IEventHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Subject\Logger\ConsoleLogger.cs" />
+    <Compile Include="Subject\Logger\ILogContributor.cs" />
+    <Compile Include="Subject\Logger\ILogger.cs" />
+    <Compile Include="Tools\IContextConsumer.cs" />
+    <Compile Include="Tools\SimulationContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Object\Agent\" />
     <Folder Include="Object\Proccessor\" />
     <Folder Include="Object\Queue\" />
-    <Folder Include="Subject\Logger\" />
-    <Folder Include="Tools\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

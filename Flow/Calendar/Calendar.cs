@@ -10,16 +10,34 @@ namespace DESF.Flow.Calendar
     /// The heart of simulation proccess. Registers and invokes
     /// terms, triggers "global" events and manages queues.
     /// </summary>
-    class Calendar : Event.IEventEmmiter
+    public class Calendar : Event.IEventEmmiter, Subject.Logger.ILogContributor, Tools.IContextConsumer
     {
 
         protected List<Term> _terms = new List<Term>();
         protected uint _time = 0;
+        protected string _uniqueName = "Calendar";
+        protected Tools.SimulationContext _context;
+        public string UniqueName
+        {
+            get
+            { return _uniqueName; }
+        }
+
+        public Calendar(Tools.SimulationContext context)
+        {
+            setContext(context);
+        }
+
+        public void setContext(Tools.SimulationContext context)
+        {
+            _context = context;
+        }
 
         protected Event.EventEmmitingProvider _provider = new Event.EventEmmitingProvider();
 
         public void AttachHandler(Event.IEventHandler handler)
         {
+            _context.Logger.Log(this, "Attached new handler: " + handler.GetType(), 5);
             _provider.AttachHandler(handler);
         }
 
