@@ -5,8 +5,14 @@ using System.Text;
 
 namespace DESF.Subject.Logger
 {
+    /// <summary>
+    /// A basic logger with console outputs
+    /// </summary>
     public class ConsoleLogger : ILogger
     {
+        /// <summary>
+        /// Verbosity level
+        /// </summary>
         public uint Level
         {
             get

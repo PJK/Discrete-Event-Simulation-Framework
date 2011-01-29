@@ -11,7 +11,13 @@ namespace DESF.Tools
     /// </summary>
     public class SimulationContext
     {
+        /// <summary>
+        /// Chosen ILogger implementation
+        /// </summary>
         public virtual Subject.Logger.ILogger Logger { set; get; }
+        /// <summary>
+        /// Calendar (supposedly) singleton
+        /// </summary>
         public virtual Flow.Calendar.Calendar Calendar { get; set; }
     }
 }

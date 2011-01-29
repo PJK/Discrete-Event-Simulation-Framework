@@ -5,12 +5,31 @@ using System.Text;
 
 namespace DESF.Flow.Calendar
 {
+    /// <summary>
+    /// Represents a term in the simulation calendar
+    /// </summary>
     public class Term : IComparable
     {
+        /// <summary>
+        /// Current simulation time
+        /// </summary>
         protected uint _time;
+
+        /// <summary>
+        /// Reference to object that had set this term
+        /// </summary>
         protected Event.IEventHandler _owner;
+
+        /// <summary>
+        /// State (event) to invoke
+        /// </summary>
         protected string _state;
+
+        /// <summary>
+        /// Data to be passed alongside
+        /// </summary>
         protected HashSet<string> _data;
+
         public uint Time
         {
             get
@@ -68,6 +87,11 @@ namespace DESF.Flow.Calendar
             _data = data;
         }
 
+        /// <summary>
+        /// Comparison method with standart signature
+        /// </summary>
+        /// <param name="arg">Reference object</param>
+        /// <returns>{-1,0,1}</returns>
         public int CompareTo(object arg)
         {
             Term what = (Term)arg;

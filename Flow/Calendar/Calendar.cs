@@ -12,16 +12,34 @@ namespace DESF.Flow.Calendar
     /// </summary>
     public class Calendar : Event.IEventEmmiter, Subject.Logger.ILogContributor, Tools.IContextConsumer
     {
-
+        /// <summary>
+        /// Holds all upcoming terms
+        /// </summary>
         protected List<Term> _terms = new List<Term>();
+
+        /// <summary>
+        /// The current simulation time
+        /// </summary>
         protected uint _time = 0;
+
         protected string _uniqueName = "Calendar";
+
+        /// <summary>
+        /// Current simulation context
+        /// </summary>
         protected Tools.SimulationContext _context;
+
+        /// <summary>
+        /// Manager of subscribers
+        /// </summary>
+        protected Event.EventEmmitingProvider _provider = new Event.EventEmmitingProvider();
+
         public string UniqueName
         {
             get
             { return _uniqueName; }
         }
+
         public uint Time
         {
             get
@@ -40,24 +58,35 @@ namespace DESF.Flow.Calendar
             _context = context;
         }
 
-        protected Event.EventEmmitingProvider _provider = new Event.EventEmmitingProvider();
-
+        /// <summary>
+        /// Attaches a new subscriber. This basically means that 
+        /// the subscriber enters the simulation
+        /// </summary>
+        /// <param name="handler">Subscriber</param>
         public void AttachHandler(Event.IEventHandler handler)
         {
             _context.Logger.Log(this, "Attached new handler: " + handler.GetType(), 5);
             _provider.AttachHandler(handler);
         }
 
+        /// <summary>
+        /// Detaches subsriber
+        /// </summary>
+        /// <param name="handler">Subscriber</param>
         public void DetachHandler(Event.IEventHandler handler)
         {
             _provider.DetachHandler(handler);
         }
 
+        /// <summary>
+        /// Add a new term for invocation
+        /// </summary>
+        /// <param name="term">The term</param>
         public void AddTerm(Term term)
         {
             if (term.Time < _time)
             {
-                throw new ArgumentException("It's not possible to add term based in past!");
+                throw new ArgumentException("It's not possible to add a term based in past!");
             }
             else if (term.Time == _time)
             {
@@ -69,17 +98,27 @@ namespace DESF.Flow.Calendar
             }
         }
 
+        /// <summary>
+        /// Invokes a term
+        /// </summary>
+        /// <param name="term">The term</param>
         protected void InvokeTerm(Term term)
         {
             _time = term.Time;
             term.Owner.Notify(new Event.SEvent(term.State, term.Data), this);
         }
 
+        /// <summary>
+        /// Starts the simulation by triggering the "SimulationStarted" event
+        /// </summary>
         public void StartSimulation()
         {
             _provider.FireEvent(new Event.SEvent("SimulationStarted", null), this);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void StopSimulation()
         {
             _provider.FireEvent(new Event.SEvent("SimulationStopped", null), this);
