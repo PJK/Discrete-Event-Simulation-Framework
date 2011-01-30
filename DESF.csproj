@@ -49,10 +49,12 @@
     <Compile Include="Flow\Event\IEventHandler.cs" />
     <Compile Include="Object\Queue\IQueue.cs" />
     <Compile Include="Object\Queue\IQueueable.cs" />
+    <Compile Include="Object\Queue\SimpleQueue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Subject\Logger\ConsoleLogger.cs" />
     <Compile Include="Subject\Logger\ILogContributor.cs" />
     <Compile Include="Subject\Logger\ILogger.cs" />
+    <Compile Include="Tools\ObjectRepository.cs" />
     <Compile Include="Tools\IContextConsumer.cs" />
     <Compile Include="Tools\SimulationContext.cs" />
   </ItemGroup>

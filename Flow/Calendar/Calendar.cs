@@ -108,6 +108,16 @@ namespace DESF.Flow.Calendar
             term.Owner.Notify(new Event.SEvent(term.State, term.Data), this);
         }
 
+        public void RemoveTerm(Term term)
+        {
+            _terms.Remove(term);
+        }
+
+        public void RemoveTermsByOwner(Flow.Event.IEventHandler owner)
+        {
+            //_terms.RemoveAll(yield.Owner == owner);
+        }
+
         /// <summary>
         /// Starts the simulation by triggering the "SimulationStarted" event
         /// </summary>

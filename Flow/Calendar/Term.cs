@@ -108,5 +108,10 @@ namespace DESF.Flow.Calendar
                 return -1;
             }
         }
+
+        public bool EqualsTo(Term t)
+        {
+            return (t.Data == Data) && (t.Owner == Owner) && (t.State == State) && (t.Time == Time);
+        }
     }
 }
