@@ -110,12 +110,24 @@ namespace DESF.Flow.Calendar
 
         public void RemoveTerm(Term term)
         {
-            _terms.Remove(term);
+            foreach (Term t in _terms)
+            {
+                if ((t == term) || t.EqualsTo(term))
+                {
+                    _terms.Remove(t);
+                }
+            }
         }
 
         public void RemoveTermsByOwner(Flow.Event.IEventHandler owner)
         {
-            //_terms.RemoveAll(yield.Owner == owner);
+            foreach (Term t in _terms)
+            {
+                if (t.Owner == owner)
+                {
+                    _terms.Remove(t);
+                }
+            }
         }
 
         /// <summary>
