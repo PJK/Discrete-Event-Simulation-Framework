@@ -7,18 +7,42 @@ namespace DESF.Object.Queue
 {
     public struct QueueElement
     {
-        IQueueable Element;
-        uint BlockingTime;
-        public QueueElement(IQueueable elem, uint btime)
+        IQueueable _element;
+        public IQueueable Element
         {
-            Element = elem;
-            BlockingTime = btime;
+            get
+            {
+                return _element;
+            }
+        }
+        uint _blockingTime;
+        public uint BlockingTime
+        {
+            get
+            {
+                return _blockingTime;
+            }
+        }
+
+        Flow.Calendar.Term _term;
+        public Flow.Calendar.Term Term
+        {
+            get
+            {
+                return _term;
+            }
+        }
+        public QueueElement(IQueueable elem, uint btime, Flow.Calendar.Term term)
+        {
+            _element = elem;
+            _blockingTime = btime;
+            _term = term;
         }
     }
 
     public class SimpleQueue : IQueue, Tools.IContextConsumer
     {
-        protected HashSet<QueueElement> _elements = new HashSet<QueueElement>();
+        protected List<QueueElement> _elements = new List<QueueElement>();
         protected Tools.SimulationContext _context;
         protected string _uniqueName;
         public string UniqueName
@@ -55,15 +79,26 @@ namespace DESF.Object.Queue
 
         public void Add(IQueueable elem, uint bloctime)
         {
-            _elements.Add(new QueueElement(elem, bloctime));
-            _context.Calendar.AddTerm(new Flow.Calendar.Term(_context.Calendar.Time + bloctime + _length, this, "ElementRejected", null));
+            Flow.Calendar.Term term = new Flow.Calendar.Term(_context.Calendar.Time + bloctime + _length, this, "ElementEjected", null);
+            _elements.Add(new QueueElement(elem, bloctime,term));
+            _context.Calendar.AddTerm(term);
             _length += bloctime;
         }
 
-        public void Remove(IQueueable elem)
+        public void Remove(IQueueable queuer)
         {
-            // will look up the element in local register and then reconstruct the calendar term
+            List<QueueElement> origElems = _elements;
+            _elements = new List<QueueElement>();
+            // will look up the element in local register and then reconstruct the calendar terms
+            foreach (QueueElement elem in origElems)
+            {
+                    if (elem.Element != queuer)
+                    {
+                        //neat code reuse :]
+                        Add(elem.Element, elem.BlockingTime);
+                    }
 
+            }
         }
 
         public uint MembersCount
