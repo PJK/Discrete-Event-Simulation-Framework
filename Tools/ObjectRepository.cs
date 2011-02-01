@@ -5,6 +5,11 @@ using System.Text;
 
 namespace DESF.Tools
 {
+    /// <summary>
+    /// Repository of typed objects. Great for passing various
+    /// groups and collections around. Associative array (hash)
+    /// with built-in unboxing.
+    /// </summary>
     public class ObjectRepository
     {
         protected Hashtable _data = new Hashtable();

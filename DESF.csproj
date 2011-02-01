@@ -30,6 +30,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -44,7 +47,7 @@
     <Compile Include="Flow\Calendar\Term.cs" />
     <Compile Include="Flow\Event\EventEmmitingProvider.cs" />
     <Compile Include="Flow\Event\ReflectiveEventDispatcher.cs" />
-    <Compile Include="Flow\Event\SEvent.cs" />
+    <Compile Include="Flow\Event\Event.cs" />
     <Compile Include="Flow\Event\IEventEmmiter.cs" />
     <Compile Include="Flow\Event\IEventHandler.cs" />
     <Compile Include="Object\Queue\IQueue.cs" />

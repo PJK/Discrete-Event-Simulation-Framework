@@ -105,14 +105,14 @@ namespace DESF.Flow.Calendar
         protected void InvokeTerm(Term term)
         {
             _time = term.Time;
-            term.Owner.Notify(new Event.SEvent(term.State, term.Data), this);
+            term.Owner.Notify(new Event.Event(term.State, term.Data), this);
         }
 
         public void RemoveTerm(Term term)
         {
             foreach (Term t in _terms)
             {
-                if ((t == term) || t.EqualsTo(term))
+                if (t.EqualsTo(term))
                 {
                     _terms.Remove(t);
                 }
@@ -135,7 +135,7 @@ namespace DESF.Flow.Calendar
         /// </summary>
         public void StartSimulation()
         {
-            _provider.FireEvent(new Event.SEvent("SimulationStarted", null), this);
+            _provider.FireEvent(new Event.Event("SimulationStarted", null), this);
         }
 
         /// <summary>
@@ -143,7 +143,7 @@ namespace DESF.Flow.Calendar
         /// </summary>
         public void StopSimulation()
         {
-            _provider.FireEvent(new Event.SEvent("SimulationStopped", null), this);
+            _provider.FireEvent(new Event.Event("SimulationStopped", null), this);
         }
 
         public bool HasNextTerm()
@@ -151,6 +151,9 @@ namespace DESF.Flow.Calendar
             return _terms.Count > 0;
         }
 
+        /// <summary>
+        /// Moves simulation to the next hop
+        /// </summary>
         public void Procceed()
         {
             _terms.Sort();

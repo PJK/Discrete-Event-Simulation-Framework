@@ -48,7 +48,7 @@ namespace DESF.Object.Queue
             _context = context;
         }
 
-        public void Notify(Flow.Event.SEvent ev, Flow.Event.IEventEmmiter source)
+        public void Notify(Flow.Event.Event ev, Flow.Event.IEventEmmiter source)
         {
             Flow.Event.ReflectiveEventDispatcher.Notify(this, ev, source);
         }
@@ -56,14 +56,14 @@ namespace DESF.Object.Queue
         public void Add(IQueueable elem, uint bloctime)
         {
             _elements.Add(new QueueElement(elem, bloctime));
-            HashSet<string> data = new HashSet<string>();
-            _context.Calendar.AddTerm(new Flow.Calendar.Term(_context.Calendar.Time + bloctime + _length, this, "ElementRejected", data));
+            _context.Calendar.AddTerm(new Flow.Calendar.Term(_context.Calendar.Time + bloctime + _length, this, "ElementRejected", null));
             _length += bloctime;
         }
 
         public void Remove(IQueueable elem)
         {
-            //td: implement
+            // will look up the element in local register and then reconstruct the calendar term
+
         }
 
         public uint MembersCount

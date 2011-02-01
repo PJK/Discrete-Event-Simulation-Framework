@@ -28,7 +28,7 @@ namespace DESF.Flow.Calendar
         /// <summary>
         /// Data to be passed alongside
         /// </summary>
-        protected HashSet<string> _data;
+        protected object[] _data;
 
         public uint Time
         {
@@ -67,7 +67,7 @@ namespace DESF.Flow.Calendar
             }
         }
 
-        public HashSet<string> Data
+        public object[] Data
         {
             get
             {
@@ -79,7 +79,7 @@ namespace DESF.Flow.Calendar
             }
         }
 
-        public Term(uint time, Event.IEventHandler owner, string state, HashSet<string> data)
+        public Term(uint time, Event.IEventHandler owner, string state, object[] data)
         {
             _time = time;
             _owner = owner;

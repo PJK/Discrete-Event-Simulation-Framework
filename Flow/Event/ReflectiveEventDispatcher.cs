@@ -18,7 +18,7 @@ namespace DESF.Flow.Event
         /// <param name="ev">The event</param>
         /// <param name="source">The emmiting object</param>
         /// <param name="handler">Object to handler the event</param>
-        public static void Notify(this IEventHandler handler, SEvent ev, IEventEmmiter source)
+        public static void Notify(this IEventHandler handler, Event ev, IEventEmmiter source)
         {
             if (handler.GetType().GetMethod("Handle" + ev.Name) != null)
             {
