@@ -1,9 +1,9 @@
-﻿# DON'T USE THIS UNLESS YOU ARE 100% SURE
-## 1) IT'S TERRIBLY BUGGED
-## 2) IT'S NOT FINISHED
-## 3) IT'S MEANT FOR EDUCATIONAL PURPOSES
-## 4) IT'S MY FIRST PROJECT IN C#
-## 5) IT'S A ONE-TIME THING
+﻿# DON'T USE THIS UNLESS YOU ARE 100% SURE:
+* 1) IT'S TERRIBLY BUGGED
+* 2) IT'S NOT FINISHED
+* 3) IT'S MEANT FOR EDUCATIONAL PURPOSES
+* 4) IT'S MY FIRST PROJECT IN C#
+* 5) IT'S A ONE-TIME THING
 
 Well, here be dragons, but my conscience is clear, I'we warned you!
 
@@ -25,17 +25,21 @@ advices, as I'm used to Ruby and PHP, so I'm having a hard time with C#.
 Tlačipoznámka pro zasvěcené: Chacha, doprdele s Pascalem!
 
 
-Copyright (c) 20011, Pavel Kalvoda
+Copyright (c) 2011, Pavel Kalvoda
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
+
 1. Redistributions of source code must retain the above copyright
    notice, this list of conditions and the following disclaimer.
+
 2. Redistributions in binary form must reproduce the above copyright
    notice, this list of conditions and the following disclaimer in the
    documentation and/or other materials provided with the distribution.
+
 3. All advertising materials mentioning features or use of this software must display the following acknowledgement: This product includes software developed by the author.
+
 4. Neither the name of the author nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
 
 THIS SOFTWARE IS PROVIDED BY Pavel Kalvoda ''AS IS'' AND ANY
