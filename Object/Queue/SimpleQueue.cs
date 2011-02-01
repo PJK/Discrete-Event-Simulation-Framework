@@ -8,7 +8,7 @@ namespace DESF.Object.Queue
     /// <summary>
     /// Internal representation of queue element
     /// </summary>
-    protected struct QueueElement
+    public struct QueueElement
     {
         IQueueable _element;
 
