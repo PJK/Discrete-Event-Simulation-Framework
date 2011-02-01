@@ -1,11 +1,13 @@
-﻿# DON'T USE THIS UNLESS YOU ARE 100% SURE:
+﻿DON'T USE THIS UNLESS YOU ARE 100% SURE:
+-----------------------------------------
+
 * 1) IT'S TERRIBLY BUGGED
 * 2) IT'S NOT FINISHED
 * 3) IT'S MEANT FOR EDUCATIONAL PURPOSES
 * 4) IT'S MY FIRST PROJECT IN C#
 * 5) IT'S A ONE-TIME THING
 
-Well, here be dragons, but my conscience is clear, I'we warned you!
+Well, here be dragons, but my conscience is clear, I've warned you!
 
 # Discrete Event Simulation Framework
 (c) Pavel Kalvoda 2011
