@@ -21,6 +21,10 @@ namespace DESF.Subject.Logger
         /// <summary>
         /// Designates level of verbosity
         /// Intended to be in range of <0,10> where 10 is the most verbose
+        /// DESF uses following:
+        /// 1 - main events
+        /// 5 - important events
+        /// 10 - every move
         /// </summary>
         uint Level { get; set; }
     }

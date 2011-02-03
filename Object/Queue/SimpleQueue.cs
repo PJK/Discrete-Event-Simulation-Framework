@@ -49,16 +49,26 @@ namespace DESF.Object.Queue
             }
         }
 
+        uint _timeCame;
+        public uint TimeCame
+        {
+            get
+            {
+                return _timeCame;
+            }
+        }
+
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="elem">Object to be queued</param>
         /// <param name="btime">Time it will take to finish it's buissines</param>
         /// <param name="term">Term created for calendar callback</param>
-        public QueueElement(IQueueable elem, uint btime, Flow.Calendar.Term term)
+        public QueueElement(IQueueable elem, uint btime, uint timecame, Flow.Calendar.Term term)
         {
             _element = elem;
             _blockingTime = btime;
+            _timeCame = timecame;
             _term = term;
         }
     }
@@ -152,8 +162,8 @@ namespace DESF.Object.Queue
         /// <param name="bloctime">Time the entity will block others</param>
         public void Add(IQueueable elem, uint bloctime)
         {
-            Flow.Calendar.Term term = new Flow.Calendar.Term(_context.Calendar.Time + bloctime + _length, this, "ElementEjected", null);
-            _elements.Add(new QueueElement(elem, bloctime,term));
+            Flow.Calendar.Term term = new Flow.Calendar.Term(_context.Calendar.Time + _length, this, "ElementEjected", null);
+            _elements.Add(new QueueElement(elem, bloctime, _context.Calendar.Time, term));
             _context.Calendar.AddTerm(term);
             _length += bloctime;
         }
@@ -165,16 +175,26 @@ namespace DESF.Object.Queue
         public void Remove(IQueueable queuer)
         {
             List<QueueElement> origElems = _elements;
+            bool first = true;
             _elements = new List<QueueElement>();
             // will look up the element in local register and then reconstruct the calendar terms
             foreach (QueueElement elem in origElems)
             {
+                if (first)
+                {
+                    if (!(elem.Element == queuer))
+                    {
+                        Add(elem.Element, elem.BlockingTime - _context.Calendar.Time + elem.TimeCame);
+                    }
+                }
+                else
+                {
                     if (elem.Element != queuer)
                     {
                         //neat code reuse :]
                         Add(elem.Element, elem.BlockingTime);
                     }
-
+                }
             }
         }
 
