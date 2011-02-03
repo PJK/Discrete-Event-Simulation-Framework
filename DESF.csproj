@@ -57,6 +57,7 @@
     <Compile Include="Subject\Logger\ConsoleLogger.cs" />
     <Compile Include="Subject\Logger\ILogContributor.cs" />
     <Compile Include="Subject\Logger\ILogger.cs" />
+    <Compile Include="Tools\LoggingHelpers.cs" />
     <Compile Include="Tools\ObjectRepository.cs" />
     <Compile Include="Tools\IContextConsumer.cs" />
     <Compile Include="Tools\SimulationContext.cs" />

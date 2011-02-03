@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
 using System.Text;
+using DESF.Tools;
 
 namespace DESF.Flow.Calendar
 {
@@ -65,7 +66,7 @@ namespace DESF.Flow.Calendar
         /// <param name="handler">Subscriber</param>
         public void AttachHandler(Event.IEventHandler handler)
         {
-            _context.Logger.Log(this, "Attached new handler: " + handler.GetType(), 5);
+            _context.Logger.Log(this, "Attached a new handler: " + LoggingHelpers.GetTypeOrName(handler), 5);
             _provider.AttachHandler(handler);
         }
 
@@ -75,6 +76,7 @@ namespace DESF.Flow.Calendar
         /// <param name="handler">Subscriber</param>
         public void DetachHandler(Event.IEventHandler handler)
         {
+            _context.Logger.Log(this, "Detached a handler: " + LoggingHelpers.GetTypeOrName(handler), 5);
             _provider.DetachHandler(handler);
         }
 
@@ -84,6 +86,7 @@ namespace DESF.Flow.Calendar
         /// <param name="term">The term</param>
         public void AddTerm(Term term)
         {
+            _context.Logger.Log(this, String.Format("Adding a new term (time: {0}, state {1}, owner {2})", term.Time, term.State, LoggingHelpers.GetTypeOrName(term.Owner)), 10);
             if (term.Time < _time)
             {
                 throw new ArgumentException("It's not possible to add a term based in past!");
@@ -105,11 +108,13 @@ namespace DESF.Flow.Calendar
         protected void InvokeTerm(Term term)
         {
             _time = term.Time;
+            _context.Logger.Log(this, String.Format("Invoking a term (time: {0}, state {1}, owner {2})", term.Time, term.State, LoggingHelpers.GetTypeOrName(term.Owner)), 1);
             term.Owner.Notify(new Event.Event(term.State, term.Data), this);
         }
 
         public void RemoveTerm(Term term)
         {
+            _context.Logger.Log(this, String.Format("Removing a term (time: {0}, state {1}, owner {2})", term.Time, term.State, LoggingHelpers.GetTypeOrName(term.Owner)), 10);
             foreach (Term t in _terms)
             {
                 if (t.EqualsTo(term))
@@ -135,6 +140,7 @@ namespace DESF.Flow.Calendar
         /// </summary>
         public void StartSimulation()
         {
+            _context.Logger.Log(this, "Starting up the simulation", 1);
             _provider.FireEvent(new Event.Event("SimulationStarted", null), this);
         }
 
@@ -143,6 +149,7 @@ namespace DESF.Flow.Calendar
         /// </summary>
         public void StopSimulation()
         {
+            _context.Logger.Log(this, "Sending SimulationSopped signal", 1);
             _provider.FireEvent(new Event.Event("SimulationStopped", null), this);
             _terms =  new List<Term>();
         }
