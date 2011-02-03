@@ -87,6 +87,11 @@ namespace DESF.Flow.Calendar
             _data = data;
         }
 
+        public Term()
+        {
+            // TODO: Complete member initialization
+        }
+
         /// <summary>
         /// Comparison method with standart signature
         /// </summary>

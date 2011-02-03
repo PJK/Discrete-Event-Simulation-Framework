@@ -144,6 +144,7 @@ namespace DESF.Flow.Calendar
         public void StopSimulation()
         {
             _provider.FireEvent(new Event.Event("SimulationStopped", null), this);
+            _terms =  new List<Term>();
         }
 
         public bool HasNextTerm()

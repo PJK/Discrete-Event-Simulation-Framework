@@ -8,7 +8,7 @@ namespace DESF.Subject.Logger
     /// <summary>
     /// A basic logger with console outputs
     /// </summary>
-    public class ConsoleLogger : ILogger
+    public class ConsoleLogger : ILogger, Tools.IContextConsumer
     {
         /// <summary>
         /// Verbosity level
@@ -31,6 +31,13 @@ namespace DESF.Subject.Logger
 
         public uint _level = 0;
 
+        protected Tools.SimulationContext _context;
+
+        public void setContext(Tools.SimulationContext context)
+        {
+            _context = context;
+        }
+
         public ConsoleLogger(uint level)
         {
             Level = level;
@@ -40,7 +47,7 @@ namespace DESF.Subject.Logger
         {
             if (level <= Level)
             {
-                Console.WriteLine(sender.UniqueName + what);
+                Console.WriteLine(String.Format("{0}  [{1}]-> {2}", _context.Calendar.Time,sender.UniqueName,what));
             }
         }
     }
