@@ -71,6 +71,18 @@ namespace DESF.Flow.Calendar
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="handlers"></param>
+        public void AttachHandler(Event.IEventHandler[] handlers)
+        {
+            foreach (Event.IEventHandler handler in handlers)
+            {
+                AttachHandler(handler);
+            }
+        }
+
+        /// <summary>
         /// Detaches subsriber
         /// </summary>
         /// <param name="handler">Subscriber</param>
@@ -78,6 +90,18 @@ namespace DESF.Flow.Calendar
         {
             _context.Logger.Log(this, "Detached a handler: " + LoggingHelpers.GetTypeOrName(handler), 5);
             _provider.DetachHandler(handler);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="handlers"></param>
+        public void DetachHandler(Event.IEventHandler[] handlers)
+        {
+            foreach (Event.IEventHandler handler in handlers)
+            {
+                DetachHandler(handler);
+            }
         }
 
         /// <summary>
