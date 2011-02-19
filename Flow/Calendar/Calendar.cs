@@ -173,7 +173,7 @@ namespace DESF.Flow.Calendar
         /// </summary>
         public void StopSimulation()
         {
-            _context.Logger.Log(this, "Sending SimulationSopped signal", 1);
+            _context.Logger.Log(this, "Sending SimulationStopped signal", 1);
             _provider.FireEvent(new Event.Event("SimulationStopped", null), this);
             _terms =  new List<Term>();
         }
