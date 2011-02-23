@@ -7,6 +7,6 @@ namespace DESF.Object.Queue
 {
     public interface IQueueable : Flow.Event.IEventHandler
     {
-        void FinishedQueuing(IQueue queue);
+        void FinishedQueuing(IQueue queue, DESF.Flow.Event.Event ev);
     }
 }

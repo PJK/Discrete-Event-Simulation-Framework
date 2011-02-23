@@ -7,7 +7,7 @@ namespace DESF.Object.Queue
 {
     public interface IQueue : Flow.Event.IEventHandler, Subject.Logger.ILogContributor
     {
-        void Add(IQueueable member, uint processingTime);
+        void Add(IQueueable member, uint processingTime, DESF.Flow.Event.Event ev);
         void Remove(IQueueable member);
         uint Length
         {

@@ -58,18 +58,28 @@ namespace DESF.Object.Queue
             }
         }
 
+        DESF.Flow.Event.Event _event;
+        public DESF.Flow.Event.Event Event
+        {
+            get {
+                return _event;
+            }
+        }
+
+
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="elem">Object to be queued</param>
         /// <param name="btime">Time it will take to finish it's buissines</param>
         /// <param name="term">Term created for calendar callback</param>
-        public QueueElement(IQueueable elem, uint btime, uint timecame, Flow.Calendar.Term term)
+        public QueueElement(IQueueable elem, uint btime, uint timecame, Flow.Calendar.Term term, DESF.Flow.Event.Event ev)
         {
             _element = elem;
             _blockingTime = btime;
             _timeCame = timecame;
             _term = term;
+            _event = ev;
         }
     }
 
@@ -160,10 +170,10 @@ namespace DESF.Object.Queue
         /// </summary>
         /// <param name="elem">The queueing entity</param>
         /// <param name="bloctime">Time the entity will block others</param>
-        public void Add(IQueueable elem, uint bloctime)
+        public void Add(IQueueable elem, uint bloctime, DESF.Flow.Event.Event ev)
         {
             Flow.Calendar.Term term = new Flow.Calendar.Term(_context.Calendar.Time + _length, this, "ElementEjected", null);
-            _elements.Add(new QueueElement(elem, bloctime, _context.Calendar.Time, term));
+            _elements.Add(new QueueElement(elem, bloctime, _context.Calendar.Time, term,ev));
             _context.Calendar.AddTerm(term);
             _length += bloctime;
         }
@@ -184,7 +194,7 @@ namespace DESF.Object.Queue
                 {
                     if (!(elem.Element == queuer))
                     {
-                        Add(elem.Element, elem.BlockingTime - _context.Calendar.Time + elem.TimeCame);
+                        Add(elem.Element, elem.BlockingTime - _context.Calendar.Time + elem.TimeCame,elem.Event);
                     }
                 }
                 else
@@ -192,7 +202,7 @@ namespace DESF.Object.Queue
                     if (elem.Element != queuer)
                     {
                         //neat code reuse :]
-                        Add(elem.Element, elem.BlockingTime);
+                        Add(elem.Element, elem.BlockingTime,elem.Event);
                     }
                 }
             }
