@@ -172,10 +172,17 @@ namespace DESF.Object.Queue
         /// <param name="bloctime">Time the entity will block others</param>
         public void Add(IQueueable elem, uint bloctime, DESF.Flow.Event.Event ev)
         {
-            Flow.Calendar.Term term = new Flow.Calendar.Term(_context.Calendar.Time + _length, this, "ElementEjected", null);
+            Flow.Calendar.Term term = new Flow.Calendar.Term(_context.Calendar.Time + _length + bloctime, this, "ElementEjected", null);
             _elements.Add(new QueueElement(elem, bloctime, _context.Calendar.Time, term,ev));
             _context.Calendar.AddTerm(term);
             _length += bloctime;
+        }
+
+        public void HandleElementEjected(Flow.Event.Event ev, Flow.Event.IEventEmmiter em)
+        {
+            QueueElement elem = _elements[0];
+            Remove(elem.Element);
+            elem.Element.FinishedQueuing(this, elem.Event);
         }
 
         /// <summary>
