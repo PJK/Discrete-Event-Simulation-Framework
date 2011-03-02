@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DESF.Object.Queue
 {
-    public interface IQueueable : Flow.Event.IEventHandler
+    public interface IQueueable
     {
         void FinishedQueuing(IQueue queue, DESF.Flow.Event.Event ev);
     }

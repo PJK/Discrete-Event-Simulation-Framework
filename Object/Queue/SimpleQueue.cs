@@ -176,12 +176,14 @@ namespace DESF.Object.Queue
             _elements.Add(new QueueElement(elem, bloctime, _context.Calendar.Time, term,ev));
             _context.Calendar.AddTerm(term);
             _length += bloctime;
+            _context.Logger.Log(this, String.Format("Added new element. Bloctime: {0}, new length: {1}, elements: {2}", bloctime, _length, MembersCount), 9);
         }
 
         public void HandleElementEjected(Flow.Event.Event ev, Flow.Event.IEventEmmiter em)
         {
             QueueElement elem = _elements[0];
             Remove(elem.Element);
+            _context.Logger.Log(this, String.Format("Rejecting first element. New length: {0}, elements: {1}", _length, MembersCount), 9);
             elem.Element.FinishedQueuing(this, elem.Event);
         }
 
