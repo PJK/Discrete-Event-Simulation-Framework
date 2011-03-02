@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Flow\Calendar\Calendar.cs" />
     <Compile Include="Flow\Calendar\Term.cs" />
+    <Compile Include="Flow\Event\Dummy\DummyEventHandler.cs" />
     <Compile Include="Flow\Event\EventEmmitingProvider.cs" />
     <Compile Include="Flow\Event\ReflectiveEventDispatcher.cs" />
     <Compile Include="Flow\Event\Event.cs" />

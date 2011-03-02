@@ -24,8 +24,7 @@ namespace DESF.Flow.Event
             {
 
                 // C# WTF?
-                object[] prms = new object[] {ev, source};
-                handler.GetType().GetMethod("Handle" + ev.Name).Invoke(handler, prms);
+                handler.GetType().GetMethod("Handle" + ev.Name).Invoke(handler, new object[] { ev, source });
             }
             else
             {

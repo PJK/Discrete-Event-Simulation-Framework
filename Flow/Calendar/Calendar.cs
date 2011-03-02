@@ -195,6 +195,10 @@ namespace DESF.Flow.Calendar
             {
                 throw new System.InvalidOperationException("Cannot procceed when the simulation hasn't started yet! Are you so fucking dumb?");
             }
+            if (_terms.Count == 0)
+            {
+                throw new System.InvalidOperationException("No term to invoke. In your face!");
+            }
             _terms.Sort();
             uint otime = _terms[0].Time;
             while ((_terms.Count > 0) && (_terms[0].Time == otime))

@@ -181,8 +181,13 @@ namespace DESF.Object.Queue
 
         public void HandleElementEjected(Flow.Event.Event ev, Flow.Event.IEventEmmiter em)
         {
+            if (_elements.Count == 0)
+            {
+                throw new Exception("Whooooo.... Trying to reject an element that isn't here...");
+            }
             QueueElement elem = _elements[0];
-            Remove(elem.Element);
+            _elements.RemoveAt(0);
+            _length -= elem.BlockingTime;
             _context.Logger.Log(this, String.Format("Rejecting first element. New length: {0}, elements: {1}", _length, MembersCount), 9);
             elem.Element.FinishedQueuing(this, elem.Event);
         }
@@ -193,9 +198,27 @@ namespace DESF.Object.Queue
         /// <param name="queuer">The entity to be dropped</param>
         public void Remove(IQueueable queuer)
         {
+            //throw new NotImplementedException("To be implemented. And I will, that I swear before my God. May he strike me down with fury and anger if do not!");
+            /*_context.Logger.Log(this, String.Format("{0} is quitting the queue", queuer), 8);
+
+            // do we have it?
+            bool exists = false;
+            foreach ( QueueElement elem in _elements)
+            {
+                if (elem.Element == queuer)
+                {
+                    exists = true;
+                }
+            }
+            if (!exists)
+            {
+                throw new ArgumentException("Given element is not present in this queue");
+            }
+
             List<QueueElement> origElems = _elements;
             bool first = true;
             _elements = new List<QueueElement>();
+            _length = 0;
             // will look up the element in local register and then reconstruct the calendar terms
             foreach (QueueElement elem in origElems)
             {
@@ -214,7 +237,7 @@ namespace DESF.Object.Queue
                         Add(elem.Element, elem.BlockingTime,elem.Event);
                     }
                 }
-            }
+            }*/
         }
 
     }
