@@ -59,6 +59,8 @@ namespace DESF.Flow.Calendar
             _context = context;
         }
 
+        public bool HasSimulationStarted;
+
         /// <summary>
         /// Attaches a new subscriber. This basically means that 
         /// the subscriber enters the simulation
@@ -166,6 +168,7 @@ namespace DESF.Flow.Calendar
         {
             _context.Logger.Log(this, "Starting up the simulation", 1);
             _provider.FireEvent(new Event.Event("SimulationStarted", null), this);
+            HasSimulationStarted = true;
         }
 
         /// <summary>
@@ -188,6 +191,10 @@ namespace DESF.Flow.Calendar
         /// </summary>
         public void Procceed()
         {
+            if (!HasSimulationStarted)
+            {
+                throw new System.InvalidOperationException("Cannot procceed when the simulation hasn't started yet! Are you so fucking dumb?");
+            }
             _terms.Sort();
             uint otime = _terms[0].Time;
             while ((_terms.Count > 0) && (_terms[0].Time == otime))
