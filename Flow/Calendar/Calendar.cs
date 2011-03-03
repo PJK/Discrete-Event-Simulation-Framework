@@ -112,7 +112,7 @@ namespace DESF.Flow.Calendar
         /// <param name="term">The term</param>
         public void AddTerm(Term term)
         {
-            _context.Logger.Log(this, String.Format("Adding a new term (time: {0}, state {1}, owner {2})", term.Time, term.State, LoggingHelpers.GetTypeOrName(term.Owner)), 10);
+            _context.Logger.Log(this, String.Format("Adding a new term (time: {0}, state {1}, owner {2})", term.Time, term.State, LoggingHelpers.GetTypeOrName(term.Owner)), 8);
             if (term.Time < _time)
             {
                 throw new ArgumentException("It's not possible to add a term based in past!");
@@ -134,7 +134,7 @@ namespace DESF.Flow.Calendar
         protected void InvokeTerm(Term term)
         {
             _time = term.Time;
-            _context.Logger.Log(this, String.Format("Invoking a term (time: {0}, state {1}, owner {2})", term.Time, term.State, LoggingHelpers.GetTypeOrName(term.Owner)), 1);
+            _context.Logger.Log(this, String.Format("Invoking a term (time: {0}, state {1}, owner {2})", term.Time, term.State, LoggingHelpers.GetTypeOrName(term.Owner)), 5);
             term.Owner.Notify(new Event.Event(term.State, term.Data), this);
         }
 
